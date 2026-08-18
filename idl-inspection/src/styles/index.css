@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: corporate --default;
+}
+
+/* ── Light theme (corporate): brand palette overrides ──
+   Same token structure as the Cervus build. Industrial navy + steel blue
+   rather than plumbing copper; retune these values to the real brand once
+   the logo/colours are settled. */
+html[data-theme="corporate"] {
+  --color-base-100: oklch(100% 0 0);                  /* pure white: cards, modals   */
+  /* Slightly deeper than a typical page grey on purpose: white cards need to
+     read as raised against it, and large fields of pure white glare. */
+  --color-base-200: oklch(94.8% 0.004 247.9);         /* cool grey: page background  */
+  --color-base-300: oklch(89.5% 0.007 247.9);         /* darker grey: borders        */
+  --color-base-content: oklch(27.5% 0.012 253.6);     /* charcoal body text           */
+  --color-primary:         oklch(24.5% 0.048 253.9);  /* deep industrial navy         */
+  --color-primary-content: oklch(100% 0 0);           /* white on navy                */
+  --color-accent:         oklch(58.5% 0.118 232.4);   /* steel blue                   */
+  --color-accent-content: oklch(100% 0 0);            /* white on steel               */
+  --color-neutral:         oklch(18% 0.028 253.9);
+  --color-neutral-content: oklch(95% 0.005 247.9);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  /* Small uppercase label above section headings. */
+  .eyebrow {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: oklch(48.5% 0.104 233.5);
+    line-height: 1.4;
+  }
+
+  /* Eyebrow on a dark/navy band. The default steel blue is tuned for
+     contrast on white and goes muddy against the primary background. */
+  .eyebrow-invert {
+    color: oklch(78% 0.098 231.8);
+  }
+
+  /* Steel blue dark enough to clear WCAG AA (4.7:1) on a white surface.
+     The --color-accent token sits at L=58.5% for use as a button *fill*,
+     which is only ~3.3:1 as text -- too low for body-size labels. */
+  .text-accent-readable {
+    color: oklch(48.5% 0.104 233.5);
+  }
+}
